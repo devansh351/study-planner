@@ -1,12 +1,12 @@
+import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'CA Study Planner',
-  description: 'Track and plan your CA studies effectively',
+  title: 'Study Planner',
+  description: 'A study planner application',
 }
 
 export default function RootLayout({
