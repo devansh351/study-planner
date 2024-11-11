@@ -65,36 +65,36 @@ const StudyPlanner = () => {
     totalProgress: 0
   });
 
-const calculateMetrics = () => {
-  // Calculate total pending lectures
-  const totalPendingLectures = subjects.reduce((acc, subject) => {
-    return acc + (subject.totalLectures - subject.lecturesCompleted);
-  }, 0);
+  const calculateMetrics = () => {
+    // Calculate total pending lectures
+    const totalPendingLectures = subjects.reduce((acc, subject) => {
+      return acc + (subject.totalLectures - subject.lecturesCompleted);
+    }, 0);
 
-  // Calculate total pending hours
-  const totalPendingHours = subjects.reduce((acc, subject) => {
-    return acc + ((subject.totalLectures - subject.lecturesCompleted) * subject.hoursPerLecture);
-  }, 0);
+    // Calculate total pending hours
+    const totalPendingHours = subjects.reduce((acc, subject) => {
+      return acc + ((subject.totalLectures - subject.lecturesCompleted) * subject.hoursPerLecture);
+    }, 0);
 
-  // Calculate required hours per day
-  let requiredHoursPerDay = 0;
-  if (basicInfo.startDate && basicInfo.targetDate) {
-    const startDate = new Date(basicInfo.startDate);
-    const targetDate = new Date(basicInfo.targetDate);
-    const totalDays = Math.ceil((targetDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
-    const totalWorkingDays = Math.ceil((totalDays / 7) * basicInfo.workingDaysPerWeek);
-    
-    if (totalWorkingDays > 0) {
-      requiredHoursPerDay = totalPendingHours / totalWorkingDays;
+    // Calculate required hours per day
+    let requiredHoursPerDay = 0;
+    if (basicInfo.startDate && basicInfo.targetDate) {
+      const startDate = new Date(basicInfo.startDate);
+      const targetDate = new Date(basicInfo.targetDate);
+      const totalDays = Math.ceil((targetDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
+      const totalWorkingDays = Math.ceil((totalDays / 7) * basicInfo.workingDaysPerWeek);
+      
+      if (totalWorkingDays > 0) {
+        requiredHoursPerDay = totalPendingHours / totalWorkingDays;
+      }
     }
-  }
 
-  return {
-    totalPendingLectures,
-    totalPendingHours,
-    requiredHoursPerDay
+    return {
+      totalPendingLectures,
+      totalPendingHours,
+      requiredHoursPerDay
+    };
   };
-};
 
   // Auth Functions
   const handleAuth = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -299,6 +299,7 @@ const calculateMetrics = () => {
               <h3 className="text-lg font-semibold">Quick Lecture Update</h3>
               <p className="text-gray-500 mt-1">Update your progress for today</p>
             </div>
+            <div className="p-6 pt-0">
               <div className="space-y-4">
                 <div className="flex gap-4 items-center">
                   <select 
@@ -352,7 +353,7 @@ const calculateMetrics = () => {
         </div>
       </div>
 
-const renderInputSection = () => (
+      {/* Input Section */}
       <div className="border rounded-lg shadow-sm">
         <div className="p-6">
           <h2 className="text-2xl font-semibold">Setup & Configuration</h2>
@@ -479,6 +480,7 @@ const renderInputSection = () => (
           </div>
         </div>
       </div>
+    </div> 
   );
 
   return (
