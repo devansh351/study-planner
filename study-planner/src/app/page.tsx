@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
@@ -98,7 +97,7 @@ const calculateMetrics = () => {
 };
 
   // Auth Functions
-  const handleAuth = async (e) => {
+  const handleAuth = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setAuthError('');
     try {
@@ -211,16 +210,16 @@ const calculateMetrics = () => {
 
   // Auth Form UI
   const renderAuthForm = () => (
-    <Card className="max-w-md mx-auto mt-8">
-      <CardHeader>
-        <CardTitle>{authMode === 'login' ? 'Login' : 'Register'}</CardTitle>
-        <CardDescription>
+    <div className="max-w-md mx-auto mt-8 border rounded-lg shadow-sm">
+      <div className="p-6">
+        <h2 className="text-2xl font-semibold">{authMode === 'login' ? 'Login' : 'Register'}</h2>
+        <p className="text-gray-500 mt-2">
           {authMode === 'login' 
             ? 'Login to access your study plan' 
             : 'Create a new account to start tracking your progress'}
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
+        </p>
+      </div>
+      <div className="p-6 pt-0">
         <form onSubmit={handleAuth} className="space-y-4">
           <div className="space-y-2">
             <label className="text-sm font-medium">Email</label>
@@ -255,18 +254,18 @@ const calculateMetrics = () => {
             </button>
           </p>
         </form>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 
   const renderMainContent = () => (
     <div className="space-y-8">
       {/* Learning Report */}
-      <Card className="bg-gradient-to-br from-blue-50 to-purple-50">
-        <CardHeader>
-          <CardTitle className="text-2xl">Learning Report</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-6">
+      <div className="border rounded-lg shadow-sm bg-gradient-to-br from-blue-50 to-purple-50">
+        <div className="p-6">
+          <h2 className="text-2xl font-semibold">Learning Report</h2>
+        </div>
+        <div className="p-6 pt-0 space-y-6">
           {/* Overall Progress */}
           <div className="space-y-2">
             <div className="flex justify-between text-sm font-medium">
@@ -295,12 +294,11 @@ const calculateMetrics = () => {
           </div>
 
           {/* Quick Update Section */}
-          <Card className="bg-white">
-            <CardHeader>
-              <CardTitle className="text-lg">Quick Lecture Update</CardTitle>
-              <CardDescription>Update your progress for today</CardDescription>
-            </CardHeader>
-            <CardContent>
+          <div className="border rounded-lg shadow-sm bg-white">
+            <div className="p-6">
+              <h3 className="text-lg font-semibold">Quick Lecture Update</h3>
+              <p className="text-gray-500 mt-1">Update your progress for today</p>
+            </div>
               <div className="space-y-4">
                 <div className="flex gap-4 items-center">
                   <select 
@@ -336,8 +334,8 @@ const calculateMetrics = () => {
                   of {subjects[quickUpdate.selectedSubject].totalLectures} lectures
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
           {/* Motivational Quote */}
           <div className="bg-white p-4 rounded-lg flex items-center justify-between">
@@ -351,15 +349,15 @@ const calculateMetrics = () => {
               <RotateCw className="w-4 h-4" />
             </Button>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
-      {/* Input Section */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Setup & Configuration</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-6">
+const renderInputSection = () => (
+      <div className="border rounded-lg shadow-sm">
+        <div className="p-6">
+          <h2 className="text-2xl font-semibold">Setup & Configuration</h2>
+        </div>
+        <div className="space-y-6">
           {/* Student Info */}
           <div className="space-y-2">
             <label className="text-sm font-medium">Student Name</label>
@@ -479,9 +477,8 @@ const calculateMetrics = () => {
               ))}
             </div>
           </div>
-        </CardContent>
-      </Card>
-    </div>
+        </div>
+      </div>
   );
 
   return (
